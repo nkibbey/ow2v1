@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Disease Similarities</title>
+    <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript" src="dispDiseaseTable.js"></script>
+    <script type="text/javascript">
+        let disease_info = diseaseVals;
+        let options = [];
+        let table_data = [];
+        let xValues = [];
+        disease_info.forEach(function(curr_disease) {
+            let tmp = [];
+            let xtmp = [];
+            for (let val in curr_disease) {
+                if (isNaN(curr_disease[val])) {
+                    options.push(curr_disease[val]);
+                } else {
+                    xtmp.push(val);
+
+                    tmp.push(parseFloat(curr_disease[val]).toFixed(4));
+                }
+            }
+            xValues = xtmp;
+            table_data.push(tmp)
+        });
+        console.log(options);
+
+
+        //////  PLOTLY
+
+        let yValues = options;
+        let zValues = table_data;
+        let colorscaleValue = [
+            [0, '#992e0f'],
+            [0.5, '#9d972c'],
+            [1, '#55ad2a']
+        ];
+        let data1 = [{
+            x: xValues,
+            y: yValues,
+            z: zValues,
+            type: 'heatmap',
+            colorscale: colorscaleValue,
+            showscale: false
+        }];
+        let layout1 = {
+            title: 'Disease Table',
+            annotations: [],
+            xaxis: {
+                ticks: '',
+                side: 'bottom'
+            },
+            yaxis: {
+                ticks: '',
+                ticksuffix: ' ',
+                width: 700,
+                height: 700,
+                autosize: true
+            }
+        };
+
+        for (let i = 0; i < yValues.length; i++) {
+            for (let j = 0; j < xValues.length; j++) {
+                let result = {
+                    xref: 'x1',
+                    yref: 'y1',
+                    x: xValues[j],
+                    y: yValues[i],
+                    text: zValues[i][j],
+                    font: { family: 'Arial', size: 12, color: 'rgb(50, 171, 96)' },
+                    showarrow: false,
+                    font: { color: 'white'}
+                };
+                layout1.annotations.push(result);
+            }
+        }
+        let disease2_info = uglyVals;
+        let options2 = [];
+        let table_data2 = [];
+        let xValues2 = [];
+        disease2_info.forEach(function(curr_disease) {
+            let tmp = [];
+            let xtmp = [];
+            for (let val in curr_disease) {
+                if (isNaN(curr_disease[val])) {
+                    options2.push(curr_disease[val]);
+                } else {
+                    xtmp.push(val);
+
+                    tmp.push(parseFloat(curr_disease[val]).toFixed(4));
+                }
+            }
+            xValues2 = xtmp;
+            table_data2.push(tmp)
+        });
+        console.log(options2);
+
+
+        //////  PLOTLY
+
+        let yValues2 = options2;
+        let zValues2 = table_data2;
+        let colorscaleValue2 = [
+            [0, '#0000ff'],
+            [0.5, '#00ffff'],
+            [1, '#00ff00']
+        ];
+
+        let data2 = [{
+            x: xValues2,
+            y: yValues2,
+            z: zValues2,
+            type: 'heatmap',
+            colorscale: colorscaleValue2,
+            showscale: false
+        }];
+        let layout2 = {
+            title: 'Dumb Disease Table',
+            annotations: [],
+            xaxis: {
+                ticks: '',
+                side: 'bottom'
+            },
+            yaxis: {
+                ticks: '',
+                ticksuffix: ' ',
+                width: 700,
+                height: 700,
+                autosize: true
+            }
+        };
+
+        for (let i = 0; i < yValues2.length; i++) {
+            for (let j = 0; j < xValues2.length; j++) {
+                let result = {
+                    xref: 'x1',
+                    yref: 'y1',
+                    x: xValues2[j],
+                    y: yValues2[i],
+                    text: zValues2[i][j],
+                    font: { family: 'Arial', size: 12, color: 'rgb(50, 171, 96)' },
+                    showarrow: false,
+                    font: { color: 'white'}
+                };
+                layout2.annotations.push(result);
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div id="myDiv"> </div>
+    <div id="extraInfo"></div>
+    <div id="ndiv"></div>
+    <script>
+        Plotly.newPlot('myDiv', data1, layout1);
+        document.getElementById("extraInfo").innerHTML = "<p> Average: " +extraInfo.average + "<br> Upper Quartile: " +
+            extraInfo.upper+"<br>Lower Quartile: "+extraInfo.lower + " </p>";
+        Plotly.newPlot('ndiv', data2, layout2);
+    </script>
+</body>
+</html>
