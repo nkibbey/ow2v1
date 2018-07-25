@@ -10,13 +10,13 @@ echo "doing 91 to 95"
 time ../w2v/word2vec -train ../parse/corporacleaner/lem_y1991to1995.txt -output ../../models/lem_m_1991_1995
 
 echo "doing 96 to 99"
-time ../w2v/word2vec -train ../parse/corporacleaner/lem_y1906to1999.txt -output ../../models/lem_m_1996_1999
+time ../w2v/word2vec -train ../parse/corporacleaner/lem_y1996to1999.txt -output ../../models/lem_m_1996_1999
 
 echo "doing 00 to 03"
 time ../w2v/word2vec -train ../parse/corporacleaner/lem_y2000to2003.txt -output ../../models/lem_m_2000_2003
 
 echo "doing 04 to 06"
-time ../w2v/word2vec -train ../parse/corporacleaner/lem_y2004o2006.txt -output ../../models/lem_m_2004_2006
+time ../w2v/word2vec -train ../parse/corporacleaner/lem_y2004to2006.txt -output ../../models/lem_m_2004_2006
 
 echo "doing 07 to 08"
 time ../w2v/word2vec -train ../parse/corporacleaner/lem_y2007to2008.txt -output ../../models/lem_m_2007_2008
